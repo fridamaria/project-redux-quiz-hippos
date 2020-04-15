@@ -1,25 +1,21 @@
-
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import styled from 'styled-components'
 import { quiz } from 'reducers/quiz'
+import { Summary } from 'components/Summary'
 import { Button } from './Button'
 import { ProgressBar } from './ProgressBar'
-import { Summary } from 'components/Summary'
 
 export const CurrentQuestion = () => {
-  const [answerIndex, setAnswerIndex] = useState() // sätt answerIndex när man klickat på ett option till att vara det indexet.
-
+  const [answerIndex, setAnswerIndex] = useState()
+  const dispatch = useDispatch()
+  const quizOver = useSelector(state => state.quiz.quizOver)
   const question = useSelector(
     (state) => state.quiz.questions[state.quiz.currentQuestionIndex]
   )
-  const answer = useSelector((state) =>
-    state.quiz.answers.find((a) => a.questionId === question.id)
+  const answer = useSelector(
+    (state) => state.quiz.answers.find((a) => a.questionId === question.id)
   )
-
-  const dispatch = useDispatch()
-
-  const quizOver = useSelector(state => state.quiz.quizOver)
 
   const handleOnClick = (index) => {
     dispatch(
@@ -38,10 +34,6 @@ export const CurrentQuestion = () => {
     }
   }
 
-  if (!question) {
-    return <h1>Oh no! I could not find the current question!</h1>
-  }
-
   if (quizOver) {
     return (
       <Summary />
@@ -54,7 +46,6 @@ export const CurrentQuestion = () => {
       {question.options.map((option, index) => (
         <Option key={index}>
           <OptionInput
-            // className={(answerIndex !== undefined) && setClassName(index)} 
             // om answerIndex har ett värde, kör setClassName
             className={(answerIndex === undefined) ? '' : setClassName(index)}
             type='button'
@@ -62,10 +53,12 @@ export const CurrentQuestion = () => {
             name='option'
             value={option}
             onClick={() => handleOnClick(index)}
+            disabled={answer ? true : false}
           />
         </Option>
       ))}
       <Button
+        answer={answer}
         onClick={() => {
           dispatch(quiz.actions.goToNextQuestion())
           setAnswerIndex()
@@ -82,8 +75,7 @@ const Question = styled.h1`
   font-size: 36px;
   text-align: center;
 `
-const Option = styled.label`
-`
+const Option = styled.label``
 
 const OptionInput = styled.input`
   display:inline-block;

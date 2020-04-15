@@ -7,10 +7,7 @@ import { CurrentQuestion } from 'components/CurrentQuestion'
 const reducer = combineReducers({
   quiz: quiz.reducer
 })
-
 const store = configureStore({ reducer })
-
-
 
 export const App = () => {
   return (
@@ -19,5 +16,3 @@ export const App = () => {
     </Provider>
   )
 }
-
-
