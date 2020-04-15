@@ -5,26 +5,24 @@ import { quiz } from 'reducers/quiz'
 import { Button } from './Button'
 
 export const CurrentQuestion = () => {
+  const [className, setClassName] = useState('')
   const question = useSelector((state) => state.quiz.questions[state.quiz.currentQuestionIndex])
+  const answer = useSelector((state) => state.quiz.answers.find((a) => (a.questionId === question.id)))
+  console.log(question)
+
+  if (answer) { console.log(answer.isCorrect) }
 
   const dispatch = useDispatch()
 
-  const [inputValue, setInputValue] = useState()
+  const handleOnClick = (index) => {
+    dispatch(quiz.actions.submitAnswer({ questionId: question.id, answerIndex: index }))
+    setClassName(question.correctAnswerIndex === index ? 'correctAnswer' : 'wrongAnswer')
+  }
 
   if (!question) {
     return <h1>Oh no! I could not find the current question!</h1>
   }
 
-  // const handleOnSubmit = (e) => {
-  //   e.preventDefault()
-  //   dispatch(quiz.actions.submitAnswer({ questionId: question.id, answerIndex: index }))
-  // }
-
-  //fixa till dispatch questionId imorgon
-
-  const handleOnChange = e => {
-    setInputValue(e.target.value)
-  }
 
   return (
     <div>
@@ -34,15 +32,18 @@ export const CurrentQuestion = () => {
         question.options.map((option, index) => (
           <Option key={index}>
             <input
+              className={className}
               type='button'
               id={index}
               name='option'
               value={option}
               onClick={() =>
-                dispatch(quiz.actions.submitAnswer({ questionId: question.id, answerIndex: index }))
+                handleOnClick(index)
               } />
           </Option>
         ))
+
+
 
       }
       <Button
