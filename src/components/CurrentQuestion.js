@@ -89,7 +89,7 @@ const Option = styled.label`
 const OptionInput = styled.input`
   display:inline-block;
   height: 70px;
-  width: 150px;
+  min-width: 250px;
   padding:0.35em 1.2em;
   border:0.1em solid #000;
   margin:0 0.3em 0.3em 0;
@@ -111,5 +111,6 @@ const QuestionContainer = styled.section`
   align-items: center;
   flex-direction: column;
   margin: auto;
-  background: white;
+  background: #ffffff56;
+  border-radius:0.12em;
   `
