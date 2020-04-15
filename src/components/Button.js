@@ -1,12 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
 
-export const Button = () => {
+export const Button = ({ onClick, buttonTitle }) => {
 
   return (
-    <QuizButton>Button</QuizButton>
+    <QuizButton
+      onClick={onClick}>{buttonTitle}</QuizButton>
   )
-
 }
 
 const QuizButton = styled.button`

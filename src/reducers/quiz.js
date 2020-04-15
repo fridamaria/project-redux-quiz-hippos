@@ -6,7 +6,7 @@ const questions = [
   { id: 2, questionText: 'Champagne is to sparkling wine what tequila is to...', options: ['Mezcal', 'Sotol', 'Raicilla', 'Pulque'], correctAnswerIndex: 0 },
   { id: 3, questionText: 'What is carbonade cooked in?', options: ['Water', 'Lard', 'Wine', 'Beer'], correctAnswerIndex: 3 },
   { id: 4, questionText: 'Which of the following is not a wine grape?', options: ['Merlot', 'Pinotage', 'Chablis', 'Zweigelt'], correctAnswerIndex: 2 },
-  { id: 5, questiontext: 'What is a Stockholmare?', options: ['A cookie', 'A person from Stockholm', 'A sausage', 'All of the above'], correctAnswerIndex: 2 },
+  { id: 5, questionText: 'What is a Stockholmare?', options: ['A cookie', 'A person from Stockholm', 'A sausage', 'All of the above'], correctAnswerIndex: 2 },
   { id: 6, questionText: 'Which one is not a berry?', options: ['Strawberry', 'Blueberry', 'Tomato', 'Avocado'], correctAnswerIndex: 0 },
   { id: 7, questionText: 'What is the national dish of Malmö?', options: ['Kebab', 'Pölse', 'Spettekaka', 'Falafel'], correctAnswerIndex: 3 },
   { id: 8, questionText: 'Which ingredient is not in a classic Princesscake?', options: ['Cream', 'jam', 'custard', 'marcipan'], correctAnswerIndex: 1 }
@@ -68,10 +68,10 @@ export const quiz = createSlice({
      * This action does not require a payload.
      */
     goToNextQuestion: (state) => {
-      if (state.currentQuesionIndex + 1 === state.questions.length) {
+      if (state.currentQuestionIndex + 1 === state.questions.length) {
         state.quizOver = true
       } else {
-        state.currentQuesionIndex += 1
+        state.currentQuestionIndex += 1
       }
     },
 

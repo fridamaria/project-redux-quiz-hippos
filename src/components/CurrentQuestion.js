@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import styled from 'styled-components'
+import { quiz } from 'reducers/quiz'
 import { Button } from './Button'
 
 export const CurrentQuestion = () => {
@@ -14,10 +15,10 @@ export const CurrentQuestion = () => {
     return <h1>Oh no! I could not find the current question!</h1>
   }
 
-  const handleOnSubmit = e => {
-    e.preventDefault()
-    dispatch(quiz.actions.submitAnswer({ questionId: 1, answerIndex: 3 }))
-  }
+  // const handleOnSubmit = (e) => {
+  //   e.preventDefault()
+  //   dispatch(quiz.actions.submitAnswer({ questionId: question.id, answerIndex: index }))
+  // }
 
   //fixa till dispatch questionId imorgon
 
@@ -28,12 +29,26 @@ export const CurrentQuestion = () => {
   return (
     <div>
       <Question>Question: {question.questionText}</Question>
-      {question.options.map((option, index) => (
-        <Option>
-          <input key={index} type='submit' id={index} name='option' value={option} onSubmit={handleOnSubmit} />
-        </Option>
-      ))}
-      <Button />
+      {
+
+        question.options.map((option, index) => (
+          <Option key={index}>
+            <input
+              type='button'
+              id={index}
+              name='option'
+              value={option}
+              onClick={() =>
+                dispatch(quiz.actions.submitAnswer({ questionId: question.id, answerIndex: index }))
+              } />
+          </Option>
+        ))
+
+      }
+      <Button
+        onClick={() => dispatch(quiz.actions.goToNextQuestion())}
+        buttonTitle='Next question' />
+
     </div>
   )
 }
