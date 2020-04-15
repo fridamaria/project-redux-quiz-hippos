@@ -20,7 +20,6 @@ export const CurrentQuestion = () => {
   const dispatch = useDispatch()
 
   const quizOver = useSelector(state => state.quiz.quizOver)
-  console.log(quizOver)
 
   const handleOnClick = (index) => {
     dispatch(
