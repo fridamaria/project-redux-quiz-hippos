@@ -15,8 +15,9 @@ A mob-programming project, creating a quiz by using Redux. The user gets direct 
 ## Tech
 
 * React.js
-* JSX
 * Redux
+* JSX
+* JavaScript ES 6
 * Styled Components
 
 ## View it live! 
